@@ -9,9 +9,12 @@ module.exports = {
       spacing: {
         "6.25": "1.563rem" // 25px
       },
-      color: {
+      colors: {
         "primary": "#283044",
         "secondary": "#9498A2"
+      },
+      fontFamily: {
+        'roboto': 'Roboto'
       }
     },
   },

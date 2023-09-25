@@ -8,7 +8,15 @@ import "./index.css";
   <main>
     
   </main>
-  <footer>
-    footer here
+  <footer class="flex flex-col justify-between container px-6.25 py-10 gap-6">
+    <div class="flex gap-2.5">
+      <img src="./assets/logo-visa.svg" alt="visa logo">
+      <img src="./assets/logo-mastercard.svg" alt="mastercard logo">
+      <img src="./assets/logo-maestro.svg" alt="maestro logo">
+      <img src="./assets/logo-processing.svg" alt="processing logo">
+    </div>
+    <p class="text-sm font-roboto text-secondary">
+      All rights reserved<br>Fast service 2021
+    </p>
   </footer>
 </template>
