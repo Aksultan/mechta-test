@@ -1,12 +1,14 @@
 <script setup>
-import "./index.css";
+import "@/index.css";
+import MainPage from "@/pages/MainPage.vue";
 </script>
 <template>
   <header class="absolute left-0 right-0 container w-full mx-auto px-5 py-6.25">
     <img alt="delivery logo" class="logo" src="./assets/logo.svg"/>
   </header>
-  <main>
-    
+  <main class="pt-28">
+    <!-- TODO: replace with router-view -->
+    <main-page/>
   </main>
   <footer class="flex flex-col justify-between container px-6.25 py-10 gap-6">
     <div class="flex gap-2.5">
