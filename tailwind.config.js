@@ -23,7 +23,8 @@ module.exports = {
       },
       borderRadius: {
         "12.5": "3.125rem", // 50px
-        "7.5": "1.875rem"  // 30px
+        "7.5": "1.875rem",  // 30px
+        "10": "2.5rem" // 40px
       },
       backgroundImage: {
           "delivery": "url('/delivery-bg.svg')"

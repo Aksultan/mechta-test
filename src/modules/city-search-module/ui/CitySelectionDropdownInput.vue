@@ -4,15 +4,15 @@
             v-model="text" 
             type="text" 
             class="bg-transparent px-5 outline-none text-2xl font-bold font-roboto max-sm:text-base placeholder:text-[#D9E4DC] placeholder:font-normal"
-            @input="debounce(searchCityByName(), 500)" 
+            @input="suggestByInput" 
             placeholder="Enter name of the city">
-        <button class="btn rounded-12.5 text-base font-bold text-white bg-gradient-to-r bg-gradient-280 from-blue to-light-blue py-3.5 px-4">
+        <button class="btn rounded-12.5 text-base font-bold text-white bg-gradient-to-r bg-gradient-280 from-blue to-light-blue py-3.5 px-4 active:scale-90">
             ENTER
         </button>
-        <div :class="[{hidden: !isActive}, 'absolute transtion-all top-full -left-[1px] -right-[1px] bg-white border border-t-0 rounded-b-7.5 border-[#E9F0EB] p-5']">
+        <div :class="[{hidden: !isActive}, 'absolute transtion-all top-full -left-[1px] -right-[1px] bg-white border border-t-0 rounded-b-7.5 border-[#E9F0EB] px-5']">
             <ul>
-                <li v-for="(item, index) in state.cities.data" :key="index" class="truncate" title="test">
-                    {{ item.city }}
+                <li v-for="city in state.cities" :key="city" class="truncate py-5 [&:not(:last-child)]:border-b cursor-pointer hover:text-secondary" :title="city" @click="selectCity">
+                    {{ city }}
                 </li>
             </ul>
         </div>
@@ -21,26 +21,38 @@
 
 <script setup>
 import { ref, computed, reactive } from 'vue';
-import cityApi from '../api/city.api';
-import debounce from 'lodash';
+// import cityApi from '../api/city.api';
+// import debounce from 'lodash';
 
 const text = ref('');
 
-const isActive = computed(() => Boolean(text.value.length));
-const state = reactive({
-    cities: null
-});
+const citites = ["nur-sultan", "almaty"]
 
-console.log(text);
-
-async function searchCityByName() {
-    if(text.value.length > 2){
-        try {
-            state.cities = await cityApi.getCityByName(text.value);
-            console.log('changing', text)
-        } catch (e) {
-            console.error(e.message);
-        }
+function suggestByInput() {
+    if (citites.some(city => city.includes(text.value))) {
+        state.cities = citites.filter(city => city.includes(text.value))
+    } else {
+        state.cities = []
     }
 }
+
+const isActive = computed(() => Boolean(text.value.length));
+const state = reactive({
+    cities: []
+});
+
+
+function selectCity() {
+    this.$emit()
+}
+// async function searchCityByName() {
+//     if(text.value.length > 2){
+//         try {
+//             state.cities = await cityApi.getCityByName(text.value);
+//             console.log('changing', text)
+//         } catch (e) {
+//             console.error(e.message);
+//         }
+//     }
+// }
 </script>
