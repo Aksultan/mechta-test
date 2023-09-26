@@ -16,7 +16,8 @@ module.exports = {
         "primary": "#283044",
         "secondary": "#9498A2",
         "blue": "#65B3E4",
-        "light-blue": "#78A1BB"
+        "light-blue": "#78A1BB",
+        "error": "#FF4757"
       },
       fontFamily: {
         'roboto': 'Roboto'

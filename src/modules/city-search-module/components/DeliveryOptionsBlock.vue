@@ -15,10 +15,7 @@ const hasData = ref(false);
 
 
 const unwatch = store.watch((state, getters) => {
-
-    console.log('change')
     hasData.value = (getters?.getDeliveryTypes?.length || 0) > 0
-    console.log(hasData)
 })
 
 
