@@ -11,7 +11,7 @@
         </button>
         <div :class="[{hidden: !isActive}, 'absolute transtion-all top-full -left-[1px] -right-[1px] bg-white border border-t-0 rounded-b-7.5 border-[#E9F0EB] px-5']">
             <ul>
-                <li v-for="city in state.cities" :key="city" class="truncate py-5 [&:not(:last-child)]:border-b cursor-pointer hover:text-secondary" :title="city" @click="selectCity">
+                <li v-for="city in state.cities" :key="city" class="truncate py-5 [&:not(:last-child)]:border-b cursor-pointer hover:text-secondary" :title="city" @click="selectCity(city)">
                     {{ city }}
                 </li>
             </ul>
@@ -21,20 +21,23 @@
 
 <script setup>
 import { ref, computed, reactive } from 'vue';
-// import cityApi from '../api/city.api';
-// import debounce from 'lodash';
+import { useStore } from 'vuex';
+import cityApi from '../api/city.api';
+import debounce from 'lodash';
 
 const text = ref('');
 
-const citites = ["nur-sultan", "almaty"]
+const citites = ["nur-sultan", "almaty"];
+
+const store = useStore();
 
 function suggestByInput() {
     if (citites.some(city => city.includes(text.value))) {
-        state.cities = citites.filter(city => city.includes(text.value))
+        state.cities = citites.filter(city => city.includes(text.value));
     } else {
-        state.cities = []
+        state.cities = [];
     }
-}
+};
 
 const isActive = computed(() => Boolean(text.value.length));
 const state = reactive({
@@ -42,17 +45,18 @@ const state = reactive({
 });
 
 
-function selectCity() {
-    this.$emit()
+function selectCity(name) {
+    debounce(searchCityByName(name), 500);
 }
-// async function searchCityByName() {
-//     if(text.value.length > 2){
-//         try {
-//             state.cities = await cityApi.getCityByName(text.value);
-//             console.log('changing', text)
-//         } catch (e) {
-//             console.error(e.message);
-//         }
-//     }
-// }
+
+async function searchCityByName(name) {
+    if(text.value.length > 2){
+        try {
+            const {data} = await cityApi.getCityByName(name)
+            await store.dispatch('setDeliveryTypes', data);
+        } catch (e) {
+            console.error(e.message);
+        }
+    }
+}
 </script>

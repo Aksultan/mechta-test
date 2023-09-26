@@ -13,7 +13,7 @@
                 </ul>
             </div>
         </div>
-        <div class="lg:w-2/4">
+        <div class="lg:w-2/4 min-h-[85vh]">
             <delivery-options-block/>
         </div>
     </div>
