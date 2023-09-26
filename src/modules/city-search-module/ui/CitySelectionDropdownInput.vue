@@ -15,7 +15,7 @@
                 ENTER
             </span>
         </button>
-        <p v-if="isError" class="absolute left-0 -bottom-2/4 text-error">
+        <p v-if="isError" class="absolute left-0 sm:w-[32rem] sm:-bottom-full -bottom-2/4 sm:text-xl text-xs text-error">
             We didn't found such city. Please check spelling
         </p>
         <div :class="[{hidden: !isDropdownVisible}, 'absolute transtion-all top-full -left-[1px] -right-[1px] bg-white border border-t-0 rounded-b-7.5 border-[#E9F0EB] px-5']">
